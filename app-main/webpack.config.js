@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const HtmlWebpackTagsPlugin = require("html-webpack-tags-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
@@ -15,13 +14,8 @@ module.exports = {
             library: { type: "var", name: "app_main" },
             filename: "remoteEntry.js",
             remotes: {
-                app_share: "app_share",
+                app_share: "app_share@http://localhost:3001/remoteEntry.js",
             },
-        }),
-        new HtmlWebpackTagsPlugin({
-            tags: ["http://localhost:3001/remoteEntry.js"],
-            append: false,
-            publicPath: false,
         }),
         new HtmlWebpackPlugin(),
     ],
