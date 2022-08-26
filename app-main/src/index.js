@@ -1,9 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    window["app_share"].get("./Sum").then((factory) => {
-        const Module = factory();
+import { Sum } from "app_share/Sum";
 
-        console.log(Module.Sum(1, 1));
-
-        return Module;
-    });
-});
+console.log(Sum(1, 1));
