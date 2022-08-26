@@ -1,9 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    window["app_share"].get("./Sum").then((factory) => {
-        const Module = factory();
+    const scriptElement = document.createElement("script");
 
-        console.log(Module.Sum(1, 1));
+    scriptElement.src = "http://localhost:3001/remoteEntry.js";
+    scriptElement.type = "text/javascript";
+    scriptElement.async = true;
 
-        return Module;
-    });
+    scriptElement.onload = () => {
+        console.log(`module loaded`);
+
+        window["app_share"].get("./Sum").then((factory) => {
+            const Module = factory();
+
+            console.log(Module.Sum(1, 1));
+
+            return Module;
+        });
+    };
+
+    document.head.appendChild(scriptElement);
 });
